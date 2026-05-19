@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>WikiPath Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {% if loading %}
+    <meta http-equiv="refresh" content="0.1">
+    {% endif %}
+
+    <style>
+        body { background-color: #f8f9fa; margin-top: 100px; }
+        .card { border-radius: 10px; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <div class="container col-md-5">
+        <div class="card p-4 text-center">
+            <h2 class="mb-4 text-primary fw-bold">WikiPath Finder</h2>
+
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            {% if not loading %}
+            <div id="form-screen">
+                <form action="/find" method="POST">
+                    <div class="mb-3">
+                        <input type="text" name="start" class="form-control" placeholder="Pagina de Start" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="target" class="form-control" placeholder="Pagina Destinație" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">Caută Drumul</button>
+                </form>
+            </div>
+            {% endif %}
+
+            {% if loading %}
+            <div id="loading-screen" class="py-4">
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+                <h5>Se calculează traseul...</h5>
+                <h3 class="text-primary fw-bold mt-2">Noduri explorate: {{ counter }}</h3>
+                <p class="text-muted small mt-2">Pagina se actualizează automat. Progresul detaliat curge în consolă.</p>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>
