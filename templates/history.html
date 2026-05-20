@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <title>WikiPathFinder - Istoric</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar-custom { background-color: #212529; }
+        .navbar-brand { color: #00ff66 !important; font-weight: 800; letter-spacing: 1px; }
+        .nav-link { color: #fff !important; font-weight: 500; }
+        .nav-link.active { color: #00ff66 !important; border-bottom: 2px solid #00ff66; }
+        .list-group-item { border: none; border-bottom: 1px solid #e9ecef; transition: background-color 0.2s ease; }
+        .list-group-item:hover { background-color: #f1f3f5; transform: translateX(5px); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom py-3 mb-5">
+        <div class="container">
+            <a class="navbar-brand" href="/">WikiPathFinder</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-3"><a class="nav-link" href="/">Acasă</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/history">Istoric Căutări</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">Căutări Recente</h2>
+                    <span class="badge bg-dark fs-6">{{ history|length }} trasee salvate</span>
+                </div>
+
+                <div class="card shadow-sm" style="border: none; border-radius: 15px; overflow: hidden;">
+                    {% if history %}
+                        <div class="list-group list-group-flush">
+                        {% for item in history %}
+                            <a href="/view_history/{{ loop.index0 }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-4 px-4">
+                                <div>
+                                    <h5 class="mb-1 text-dark fw-bold">{{ item.start }} <span style="color: #00ff66; margin: 0 10px;">➔</span> {{ item.target }}</h5>
+                                </div>
+                                <span class="badge rounded-pill" style="background-color: #00ff66; color: #000; font-weight: 800; font-size: 1rem; padding: 10px 15px;">
+                                    Generare Instant ({{ item.path|length }} pași)
+                                </span>
+                            </a>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center p-5">
+                            <h4 class="text-muted mb-3">Istoricul este gol</h4>
+                            <p class="text-secondary mb-4">Începe o căutare nouă pentru a salva traseele aici.</p>
+                            <a href="/" class="btn fw-bold px-4 py-2" style="background-color: #00ff66; color: #000;">Înapoi Acasă</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
