@@ -39,9 +39,7 @@ Prin prezenta, declar următoarele:
 - Nu au fost utilizate fragmente de cod sau active grafice care să încalce drepturile de autor.
 
 ## Autori
-Nume și Prenume: [COMPLETEAZĂ AICI]
-Instituția: [COMPLETEAZĂ AICI]
-Roluri: [Ex: Dezvoltare Backend, Design Interfață, Algoritmică]
-
+Nume și Prenume: Chitulescu Dragos-Mihai
+Instituția: Colegiul National "Constantin Carabella"
 ---
-Proiect realizat pentru Concursul InfoEducație, Etapa [COMPLETEAZĂ AICI], 2026.
+Proiect realizat pentru Concursul InfoEducație, 2026.
