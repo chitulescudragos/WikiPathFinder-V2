@@ -211,12 +211,14 @@ def step():
     if state["queue_s"] and (not state["queue_t"] or len(state["queue_s"]) <= len(state["queue_t"])):
         current = state["queue_s"].popleft()
         if not is_disambiguation(current):
+            print(f"[START -> TARGET] Current: {current} | Total: {state['nodes_counter']}", flush=True)
             try:
                 for nbh in get_links(current):
                     if nbh not in state["visited_s"]:
                         state["visited_s"][nbh] = current
                         state["queue_s"].append(nbh)
                         state["nodes_counter"] += 1
+                        print(f"  [+] Găsit link: {nbh} | Total: {state['nodes_counter']}", flush=True)
 
                         if nbh in state["visited_t"]:
                             path = intersection(nbh, state["visited_s"], state["visited_t"])
@@ -229,15 +231,19 @@ def step():
     else:
         current = state["queue_t"].popleft()
         if not is_disambiguation(current):
+            print(f"[TARGET -> START] Current: {current} | Total: {state['nodes_counter']}", flush=True)
+
             try:
                 for bnbh in get_backlinks(current):
-                    state["nodes_counter"] += 1
+
 
                     if (bnbh, current) in verified_backedges or current in set(get_links(bnbh)):
                         verified_backedges.add((bnbh, current))
                         if bnbh not in state["visited_t"]:
                             state["visited_t"][bnbh] = current
                             state["queue_t"].append(bnbh)
+                            state["nodes_counter"] += 1
+                            print(f"  [+] Găsit backlink: {bnbh} | Total: {state['nodes_counter']}", flush=True)
 
                             if bnbh in state["visited_s"]:
                                 path = intersection(bnbh, state["visited_s"], state["visited_t"])
